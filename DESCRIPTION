@@ -1,0 +1,18 @@
+Package: testthatBdd
+Title: testthat-bdd
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Matúš",
+           family = "Goljer",
+           role = c("aut", "cre"),
+           email = "matus.goljer@ydistri.com")
+Description: Mocha-style BDD framework for testthat.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    rlang,
+    testthat
+Config/testthat/edition: 3
