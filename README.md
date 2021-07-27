@@ -25,6 +25,8 @@ renv::install("ydistri/testthatBdd")
 
 # Usage
 
+## Writing tests
+
 In general the usage is the same as [mochajs](https://mochajs.org/) so
 feel free to refer to their documentation.  Here we recount briefly
 the main features.
@@ -97,6 +99,47 @@ describe("addition", {
 
 })
 ```
+
+## Skipping tests
+
+To skip an individual test, change the `it` to `xit`, it will then be
+makred as skipped.  To skip an entire suite, change `describe` to
+`xdescribe` and all the nested `describe` and `it` sections
+(recursively) will be skipped.  You can also use the standard `skip_*`
+functions from `testthat` as usual.
+
+``` R
+describe("addition", {
+
+  it("works with small numbers", {
+    expect_equal(1 + 1, 2)
+  })
+
+  xit("works with big numbers", {
+    expect_equal(10 + 10, 2)
+  })
+
+  it("works with enormous numbers", {
+    skip("Platform does not support enormous numbers")
+    expect_equal(100000000000 + 100000000000, 2)
+  })
+
+})
+```
+
+``` shell
+$ Rscript -e 'devtools::test(reporter = MochaReporter$new())'
+
+  addition
+    ✓ works with small numbers
+    ? works with big numbers
+    ? works with enormous numbers
+
+3 tests, 0 failures, 2 skipped, 0.27 seconds
+
+```
+
+## Reporter
 
 To use the mocha-style reporter, set the reporter to `MochaReporter`:
 
