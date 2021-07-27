@@ -65,6 +65,9 @@ level and run in order from the most general to the most specific
 before the `it` code is executed.
 
 ``` R
+library(testthat)
+library(testthatBdd)
+
 describe("addition", {
 
   before_each({
