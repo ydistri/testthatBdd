@@ -33,6 +33,9 @@ Create a test file as usual for `testthat`, but instead of using
 `test_that`, use a combination of `describe` and `it` blocks:
 
 ``` R
+library(testthat)
+library(testthatBdd)
+
 test_that("addition works", {
   expect_equal(1 + 1, 2)
   expect_equal(10 + 10, 20)
@@ -70,7 +73,7 @@ describe("addition", {
 
   describe("with small numbers", {
 
-    it("works numbers", {
+    it("works", {
       expect_equal(a + a, 2)
     })
 
@@ -83,7 +86,7 @@ describe("addition", {
       a <- a * 10
     })
 
-    it("works with big numbers", {
+    it("works", {
       expect_equal(a + a, 20)
     })
 
@@ -91,6 +94,23 @@ describe("addition", {
 
 })
 ```
+
+To use the mocha-style reporter, set the reporter to `MochaReporter`:
+
+``` shell
+$ Rscript -e 'devtools::test(reporter = MochaReporter$new())'
+
+  addition
+    with small numbers
+      ✓ works
+    with big numbers
+      ✓ works
+
+2 tests, 0 failures, 0 skipped, 0.1 seconds
+```
+
+The reporter might or might not work nicely with the standard
+`test_that` style tests, so use at your own risk.
 
 # Limitations
 
